@@ -358,36 +358,7 @@ function bearing(startLat, startLng, destLat, destLng){
                                 })
                       },1000)
                       // Battle Situation
-                      setInterval(function () {
-                        const url_targetsUpdate = '/data/reviewTargetTrace_';
-                        axios
-                                .get(url_targetsUpdate + countX)
-                                .then(function (response) {
-                                  countX +=1;
-                                  if (countX===100) countX=0;
-                                  if (response.data.msg !== 'success') {
-                                    console.log('Receive Error!')
-                                  }
-                                  // console.log(response.data.data);
-                                  for (let i = 0; i < response.data.data.length; i++){
-                                    const targetUpdate = response.data.data[i];
-                                    const targetId = targetUpdate.targetId;
-                                    const latitudeUpdate = targetUpdate.latitude;
-                                    const altitudeUpdate = targetUpdate.altitude;
-                                    const longitudeUpdate = targetUpdate.longtitude;
-                                    const targetData = TargetModels[currentScenario[0]][targetId];
-                                    const entityId = targetData.id;
-                                    let temp = viewer.entities.getById(entityId);
-                                    const labelUpdate = targetData.targetname +' (' + longitudeUpdate + ',' + latitudeUpdate + ',' + altitudeUpdate + ')';
-                                    temp.label.text = labelUpdate;
-                                    temp.name = labelUpdate;
-                                  }
-                                  console.log('target update over')
-                                })
-                                .catch(function (error) {
-                                  console.log(error)
-                                })
-                      },1000)
+
 
                       setInterval(()=> {
                         const url_linksUpdate = '/data/JXCommunicationReponse_';
